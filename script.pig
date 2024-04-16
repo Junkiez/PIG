@@ -24,7 +24,9 @@ female_over_60_count = FOREACH (GROUP female_over_60 ALL) GENERATE COUNT(female_
 -- Обчислення кількості всіх записів про жінок
 female_count = FOREACH (GROUP female_data ALL) GENERATE COUNT(female_data) AS count;
 -- Обчислення відсотка жінок старших 60 років з вагою менше 65 кг
-female_over_60_percentage = FOREACH female_over_60_count CROSS female_count GENERATE ($0 / $1) * 100 AS percentage;
+joined_data = JOIN female_over_60_count BY count, female_count BY count;
+-- Обчислення відсотка жінок старших 60 років з вагою менше 65 кг
+female_over_60_percentage = FOREACH joined_data GENERATE ($0 / $1) * 100 AS percentage;
 
 -- Виведення результатів
 female_over_60_percentage_output = FOREACH female_over_60_percentage GENERATE 'Відсоток жінок старших 60 років з вагою менше 65 кг:', $0 AS percentage;
