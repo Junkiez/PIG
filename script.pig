@@ -24,9 +24,6 @@ female_count = FOREACH (GROUP female_data ALL) GENERATE COUNT(female_data) AS co
 female_over_60_percentage = FOREACH (GROUP female_over_60 ALL) GENERATE (COUNT(female_over_60) / COUNT(female_data)) * 100 AS percentage;
 
 -- Виведення результатів
-female_height_avg_output = FOREACH female_height_avg GENERATE 'Середній зріст жінок:', $0 AS height_avg;
 female_over_60_percentage_output = FOREACH female_over_60_percentage GENERATE 'Відсоток жінок старших 60 років з вагою менше 65 кг:', $0 AS percentage;
 
--- Вивід результатів
-final_output = UNION male_height_avg_output, female_height_avg_output, female_over_60_percentage_output;
-DUMP final_output;
+DUMP female_over_60_percentage_output;
