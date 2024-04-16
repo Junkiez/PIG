@@ -23,7 +23,7 @@ female_over_60_count = COUNT(female_over_60);
 female_count = COUNT(female_data);
 
 -- Обчислення відсотка жінок старших 60 років з вагою менше 65 кг
-female_over_60_percentage = (female_over_60_count / female_count) * 100;
+female_over_60_percentage = FOREACH (GROUP female_over_60 ALL) GENERATE (COUNT(female_over_60) / COUNT(female_data)) * 100 AS percentage;
 
 -- Виведення результатів
 male_height_avg_output = FOREACH male_height_avg GENERATE 'Середній зріст чоловіків:', $0 AS height_avg;
