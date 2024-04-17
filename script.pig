@@ -15,7 +15,11 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/itsymbaliuk/bootcam
     cardio:int
 );
 
+male_data = FILTER data BY gender == 1;
 female_data = FILTER data BY gender == 2;
+
+male_avg_height = AVG(male_data.height);
+female_avg_height = AVG(female_data.height);
 
 -- Фільтруємо дані за віком та вагою для жінок
 female_over_60 = FILTER female_data BY age > 60 AND weight < 65;
@@ -31,4 +35,4 @@ female_over_60_percentage = FOREACH joined_data GENERATE ($0 / $1) * 100 AS perc
 -- Виведення результатів
 female_over_60_percentage_output = FOREACH female_over_60_percentage GENERATE 'Відсоток жінок старших 60 років з вагою менше 65 кг:', $0 AS percentage;
 
-DUMP female_over_60;
+DUMP male_avg_height,female_avg_height,female_over_60_count;
