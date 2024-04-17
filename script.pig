@@ -1,5 +1,5 @@
 -- Завантаження даних з файлу
-data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/home/maria_dev/bootcamp5.csv' USING PigStorage(',') AS (
+data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/itsymbaliuk/bootcamp5.csv' USING PigStorage(',') AS (
     age:int,
     gender:int,
     height:int,
