@@ -26,6 +26,5 @@ female_count = FOREACH (GROUP female_data ALL) GENERATE COUNT(female_data) AS co
 joined_data = JOIN female_over_60_count BY count, female_count BY count;
 female_over_60_percentage = FOREACH joined_data GENERATE ($0 / $1) * 100 AS percentage;
 
-DUMP avg_height;
--- DUMP female_avg_height;
--- DUMP female_over_60_percentage;
+-- DUMP avg_height;
+DUMP female_over_60_percentage;
