@@ -18,8 +18,8 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/itsymbaliuk/bootcam
 male_data = FILTER data BY gender == 1;
 female_data = FILTER data BY gender == 2;
 
-male_avg_height = AVG(male_data height);
-female_avg_height = AVG(female_data height);
+male_avg_height = AVG(male_data.height);
+female_avg_height = AVG(female_data.height);
 
 -- Фільтруємо дані за віком та вагою для жінок
 female_over_60 = FILTER female_data BY age > 60 AND weight < 65;
