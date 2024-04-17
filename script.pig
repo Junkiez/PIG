@@ -37,6 +37,7 @@ female_over_60_percentage_output = FOREACH female_over_60_percentage GENERATE 'Ð
 
 out = UNION male_avg_height,female_avg_height,female_over_60_count;
 
-DUMP (1488);
+DUMP out;
+DUMP male_avg_height;
 DUMP female_avg_height;
 DUMP female_over_60_count;
