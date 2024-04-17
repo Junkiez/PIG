@@ -21,7 +21,7 @@ female_data = FILTER data BY gender == 2;
 avg_height = FOREACH ( GROUP data BY gender ) GENERATE group, AVG(data.height);
 
 female_over_60 = FILTER female_data BY age > 60 AND weight < 65;
-female_over_60_count = FOREACH (GROUP female_over_60 ALL) GENERATE COUNT(female_over_60) AS 'COUNT: ',count;
+female_over_60_count = FOREACH (GROUP female_over_60 ALL) GENERATE COUNT(female_over_60) AS `COUNT: `,count;
 female_count = FOREACH (GROUP female_data ALL) GENERATE COUNT(female_data) AS count;
 joined_data = JOIN female_over_60_count BY count, female_count BY count;
 female_over_60_percentage = FOREACH joined_data GENERATE ($0 / $1) * 100 AS percentage;
