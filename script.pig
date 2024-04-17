@@ -31,4 +31,4 @@ female_over_60_percentage = FOREACH joined_data GENERATE ($0 / $1) * 100 AS perc
 -- Виведення результатів
 female_over_60_percentage_output = FOREACH female_over_60_percentage GENERATE 'Відсоток жінок старших 60 років з вагою менше 65 кг:', $0 AS percentage;
 
-DUMP female_data;
+DUMP female_over_60;
