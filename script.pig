@@ -18,7 +18,7 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/itsymbaliuk/bootcam
 male_data = FILTER data BY gender == 1;
 female_data = FILTER data BY gender == 2;
 
-avg_height = FOREACH ( GROUP data BY gender ) GENERATE group AVG(data.height);
+avg_height = FOREACH ( GROUP data BY gender ) GENERATE group, AVG(data.height);
 
 female_over_60 = FILTER female_data BY age > 60 AND weight < 65;
 female_over_60_count = FOREACH (GROUP female_over_60 ALL) GENERATE COUNT(female_over_60) AS count;
@@ -26,6 +26,6 @@ female_count = FOREACH (GROUP female_data ALL) GENERATE COUNT(female_data) AS co
 joined_data = JOIN female_over_60_count BY count, female_count BY count;
 female_over_60_percentage = FOREACH joined_data GENERATE ($0 / $1) * 100 AS percentage;
 
-DUMP male_data;
+DUMP avg_height;
 -- DUMP female_avg_height;
 -- DUMP female_over_60_percentage;
