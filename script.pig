@@ -15,9 +15,10 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/itsymbaliuk/bootcam
     cardio:int
 );
 
+male_data = FILTER data BY gender == 1;
 female_data = FILTER data BY gender == 2;
 
-avg_height = FOREACH ( GROUP data BY gender ) GENERATE AVG(data.height);
+avg_height = FOREACH ( GROUP data BY gender ) GENERATE group AVG(data.height);
 
 female_over_60 = FILTER female_data BY age > 60 AND weight < 65;
 female_over_60_count = FOREACH (GROUP female_over_60 ALL) GENERATE COUNT(female_over_60) AS count;
