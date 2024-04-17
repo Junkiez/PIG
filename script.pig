@@ -24,7 +24,6 @@ female_avg_height = FOREACH ( GROUP female_data ALL ) GENERATE AVG(female_data.h
 female_over_60 = FILTER female_data BY age > 60 AND weight < 65;
 female_over_60_count = FOREACH (GROUP female_over_60 ALL) GENERATE COUNT(female_over_60) AS count;
 female_count = FOREACH (GROUP female_data ALL) GENERATE COUNT(female_data) AS count;
--- Обчислення відсотка жінок старших 60 років з вагою менше 65 кг
 joined_data = JOIN female_over_60_count BY count, female_count BY count;
 female_over_60_percentage = FOREACH joined_data GENERATE ($0 / $1) * 100 AS percentage;
 
