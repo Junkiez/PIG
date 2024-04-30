@@ -29,5 +29,5 @@ extra_data = FOREACH female_over_60 GENERATE ((weight < 65) ? 1 : 0) as cond;
 
 -- DUMP avg_height;
 -- DUMP female_over_60_percentage;
-DUMP COUNT(extra_data);
+DUMP (extra_data / 2);
 
