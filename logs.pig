@@ -26,7 +26,7 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/downloaded-logs.csv
     project_id:chararray,
     revision_name:chararray,
     service_name:chararray,
-    type:chararray,
+    resource_type:chararray,
     severity:chararray,
     spanId:int,
     textPayload:chararray,
@@ -38,7 +38,7 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/downloaded-logs.csv
 --male_data = FILTER data BY gender == 1;
 --female_data = FILTER data BY gender == 2;
 
-clean_data = FOREACH data GENERATE requestMethod, status, latency, remoteIp, severity, timestamp ;
+clean_data = FOREACH data GENERATE requestMethod, status, latency, remoteIp, severity, spanId, timestamp ;
 
 --Task 1
 --avg_height = FOREACH ( GROUP data BY gender ) GENERATE group, AVG(data.height);
