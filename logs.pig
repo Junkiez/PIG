@@ -1,5 +1,6 @@
 -- Завантаження даних з файлу
 data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/downloaded-logs.csv' USING PigStorage(';') AS (
+    id: int,
     latency:chararray,
     protocol:chararray,
     referer:chararray,
