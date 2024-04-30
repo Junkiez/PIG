@@ -41,7 +41,7 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/downloaded-logs.csv
 
 clean_data = FOREACH data GENERATE requestMethod, status, latency, remoteIp, severity, timestamp ;
 
-status_data = FOREACH (GROUP clean_data BY status) GENERATE COUNT(clean_data) as count;
+status_data = FOREACH (GROUP clean_data BY status) GENERATE group as name, COUNT(clean_data) as count;
 
 --Task 1
 --avg_height = FOREACH ( GROUP data BY gender ) GENERATE group, AVG(data.height);
