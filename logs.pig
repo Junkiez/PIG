@@ -43,6 +43,8 @@ status_data = FOREACH (GROUP clean_data BY status) GENERATE 'Status: ' as format
 W = rank clean_data;
 first_ten =  filter W by (rank_clean_data<10);
 
+sorted_data = ORDER clean_data BY status DESC;
+
 --Task 1
 --avg_height = FOREACH ( GROUP data BY gender ) GENERATE group, AVG(data.height);
 
@@ -53,4 +55,4 @@ first_ten =  filter W by (rank_clean_data<10);
 --female_over_60_percentage = FOREACH (GROUP extra_data BY cond) GENERATE (group == 1 ? 'Less then 65kg: ' : 'More then 65kg: ') AS type, COUNT(extra_data)/(double)female_over_60_count.count * 100 as count, '%' AS sym;
 --res = FILTER female_over_60_percentage BY type == 'Less then 65kg: ';
 
-DUMP first_ten;
+DUMP sorted_data;
