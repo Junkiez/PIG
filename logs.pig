@@ -41,7 +41,7 @@ clean_data = FOREACH data GENERATE requestMethod, status, latency, remoteIp, sev
 status_data = FOREACH (GROUP clean_data BY status) GENERATE 'Status: ' as format, group as name, ' = ' as equal, COUNT(clean_data) as count;
 
 W = rank clean_data;
-first_ten =  filter W by (f1>10) and (f1<=20);
+first_ten =  filter W by (ranc_clean_data<10);
 
 --Task 1
 --avg_height = FOREACH ( GROUP data BY gender ) GENERATE group, AVG(data.height);
