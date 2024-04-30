@@ -24,7 +24,7 @@ female_over_60 = FILTER female_data BY age > 60;
 --female_over_60_count = FOREACH (GROUP female_over_60 ALL) GENERATE COUNT(female_over_60) AS count;
 --female_count = FOREACH (GROUP female_data ALL) GENERATE COUNT(female_data) AS count;
 extra_data = FOREACH female_over_60 GENERATE ((weight < 65) ? 1 : 0) as cond;
-female_over_60_percentage = GROUP extra_data BY cond;
+female_over_60_percentage = FOREACH (GROUP extra_data BY cond) GENERATE COUNT(extra_data) as count;
 
 
 -- DUMP avg_height;
