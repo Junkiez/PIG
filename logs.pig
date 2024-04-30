@@ -38,7 +38,7 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/downloaded-logs.csv
 --male_data = FILTER data BY gender == 1;
 --female_data = FILTER data BY gender == 2;
 
-clear_data = FOREACH data GENERATE requestMethod, status, latency, requestSize, type, severity, spanId ;
+clean_data = FOREACH data GENERATE requestMethod, status, latency, requestSize, type, severity, spanId ;
 
 --Task 1
 --avg_height = FOREACH ( GROUP data BY gender ) GENERATE group, AVG(data.height);
@@ -50,4 +50,4 @@ clear_data = FOREACH data GENERATE requestMethod, status, latency, requestSize, 
 --female_over_60_percentage = FOREACH (GROUP extra_data BY cond) GENERATE (group == 1 ? 'Less then 65kg: ' : 'More then 65kg: ') AS type, COUNT(extra_data)/(double)female_over_60_count.count * 100 as count, '%' AS sym;
 --res = FILTER female_over_60_percentage BY type == 'Less then 65kg: ';
 
-DUMP data;
+DUMP clean_data;
