@@ -28,7 +28,7 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/downloaded-logs.csv
     service_name:chararray,
     resource_type:chararray,
     severity:chararray,
-    spanId:int,
+    spanId:chararray,
     textPayload:chararray,
     timestamp:chararray,
     trace:chararray,
