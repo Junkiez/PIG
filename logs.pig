@@ -32,7 +32,7 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/downloaded-logs.csv
     textPayload:chararray,
     timestamp:chararray,
     trace:chararray,
-    traceSampled:chararray,
+    traceSampled:chararray
 );
 
 --male_data = FILTER data BY gender == 1;
