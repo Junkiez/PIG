@@ -33,5 +33,5 @@ female_over_60_percentage = FOREACH joined_data GENERATE ((female_over_60_count.
 
 -- DUMP avg_height;
 -- DUMP female_over_60_percentage;
-DUMP joined_data;
+DUMP female_over_60;
 
