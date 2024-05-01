@@ -25,7 +25,7 @@ avg_height = FOREACH ( GROUP data BY gender ) GENERATE group, AVG(data.height);
 female_over_60 = FILTER female_data BY age > 60;
 -- female_over_60_count = FOREACH (GROUP female_over_60 ALL) GENERATE COUNT(female_over_60) AS count;
 extra_data = FOREACH female_over_60 GENERATE ((weight < 65) ? 1 : 0) as cond;
-female_over_60_percentage = FOREACH (GROUP extra_data BY ALL) GENERATE AVG(extra_data.cond) AS av;
+female_over_60_percentage = FOREACH (GROUP extra_data ALL) GENERATE AVG(extra_data.cond) AS av;
 --res = FILTER female_over_60_percentage BY type == 'Less then 65kg: ';
 
 DUMP female_over_60_percentage;
