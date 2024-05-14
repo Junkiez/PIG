@@ -29,7 +29,7 @@ female_over_60_percentage = FOREACH (GROUP extra_data ALL) GENERATE AVG(extra_da
 
 male_data = FILTER data BY gender == 1 AND cardio == 0;
 extra_data = FOREACH male_data GENERATE ((weight > 90) ? 1 : 0) as cond;
-result = FOREACH (GROUP extra_data ALL) GENERATE SIZE(extra_data.cond) AS av;
+result = FOREACH (GROUP extra_data ALL) GENERATE AVG(extra_data.cond) AS av;
 --res = FILTER female_over_60_percentage BY type == 'Less then 65kg: ';
 
 DUMP result;
