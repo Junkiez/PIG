@@ -36,12 +36,14 @@ data = LOAD 'hdfs://sandbox-hdp.hortonworks.com:8020/uhadoop/downloaded-logs.csv
     traceSampled:chararray
 );
 
-clean_data = FOREACH data GENERATE requestMethod, status, latency, remoteIp, severity, timestamp ;
+clean_data = FOREACH data GENERATE requestMethod, status, latency, remoteIp, severity, timestamp, requestSize;
 
 status_data = FOREACH (GROUP clean_data BY status) GENERATE 'Status: ' as format, group as name, ' = ' as equal, COUNT(clean_data) as count;
 
 W = rank clean_data;
 first_ten =  filter W by (rank_clean_data<10);
+
+lat = FOREACH (GROUP clean_data ALL) GENERATE AVG(clean_data.requestSize);
 
 sorted_data = ORDER clean_data BY status DESC;
 
